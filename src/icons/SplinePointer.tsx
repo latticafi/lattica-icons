@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const SplinePointer = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M5 17A12 12 0 0 1 17 5m-4.966 7.681a.499.499 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M19 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4M5 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4" /></svg>);
+SplinePointer.displayName = "SplinePointer";
+export default SplinePointer;

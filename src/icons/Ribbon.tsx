@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Ribbon = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 11.22C11 9.997 10 9 10 8a2 2 0 1 1 4 0c0 1-.998 2.002-2.01 3.22M12 18l2.57-3.5" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M6.243 9.016a7 7 0 0 1 11.507-.009m-8.4 5.523L12 11.22" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M9.35 14.53C7.728 12.246 6 10.221 6 7c0-1.326.632-2.598 1.757-3.536C8.883 2.527 10.41 2 12 2s3.117.527 4.243 1.464C17.368 4.402 18 5.674 18 7c-.005 3.22-1.778 5.235-3.43 7.5l3.557 4.527a1 1 0 0 1-.203 1.43l-1.894 1.36a1 1 0 0 1-1.384-.215L12 18l-2.679 3.593a1 1 0 0 1-1.39.213l-1.865-1.353a1 1 0 0 1-.203-1.422z" /></svg>);
+Ribbon.displayName = "Ribbon";
+export default Ribbon;

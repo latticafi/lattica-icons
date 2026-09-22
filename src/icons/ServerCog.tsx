@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ServerCog = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m10.852 14.772-.383.923m2.679-.923a3.002 3.002 0 0 0 .974-4.894 3 3 0 0 0-.974-.65m0 0a3 3 0 0 0-2.296 0l-.383-.923m2.68.923.382-.923" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m13.53 15.696-.382-.925a3 3 0 1 1-2.296-5.543m3.92 1.624.923-.383m-.923 2.679.923.383" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5m-15 4H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5M6 18h.01M6 6h.01m3.218 4.852-.923-.383m.923 2.679-.923.383" /></svg>);
+ServerCog.displayName = "ServerCog";
+export default ServerCog;

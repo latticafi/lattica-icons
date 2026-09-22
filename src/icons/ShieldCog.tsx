@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ShieldCog = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m10.929 14.467-.383.924m.383-6.468L10.546 8m2.679.923L13.608 8m-.001 7.391-.382-.924m1.624-3.92.923-.383m-.923 2.68.923.382m-6.467-2.679-.923-.383m.923 2.68-.923.382M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12.077 14.695a3 3 0 1 0 0-6 3 3 0 0 0 0 6" /></svg>);
+ShieldCog.displayName = "ShieldCog";
+export default ShieldCog;

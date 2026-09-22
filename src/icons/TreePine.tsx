@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const TreePine = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 22v-3m5-5 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7z" /></svg>);
+TreePine.displayName = "TreePine";
+export default TreePine;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ShieldHalf = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 2c-.279 0-.548.1-.76.28C9.5 3.8 7 5 5 5a1 1 0 0 0-1 1v7c0 5 3.5 7.5 7.67 8.94a1 1 0 0 0 .67.01C16.5 20.5 20 18 20 13V6a1 1 0 0 0-1-1c-2 0-4.49-1.19-6.24-2.72A1.17 1.17 0 0 0 12 2m0 0v20" /></svg>);
+ShieldHalf.displayName = "ShieldHalf";
+export default ShieldHalf;

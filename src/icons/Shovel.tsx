@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Shovel = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M16.878 7.122a3 3 0 0 0 4.212.03l.47-.47a1.5 1.5 0 0 0 0-2.122l-2.121-2.12a1.5 1.5 0 0 0-2.121 0l-.44.44a3 3 0 0 0 0 4.242m0 0L9 15m-6 7a1 1 0 0 1-1-1v-3.586a1 1 0 0 1 .293-.707l3.355-3.355a1.205 1.205 0 0 1 1.704 0l3.296 3.296a1.205 1.205 0 0 1 0 1.704l-3.355 3.355a1 1 0 0 1-.707.293z" /></svg>);
+Shovel.displayName = "Shovel";
+export default Shovel;

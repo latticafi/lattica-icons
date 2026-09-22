@@ -1,15 +1,12 @@
 import { readdir, readFile, writeFile, mkdir, rm } from "node:fs/promises";
 import { join } from "node:path";
 import { transform } from "@svgr/core";
+import { toPascalCase } from "./lib/icons.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SVG_DIR = join(ROOT, "svg");
 const ICONS_DIR = join(ROOT, "src", "icons");
 const SRC = join(ROOT, "src");
-
-function toPascalCase(s) {
-  return s.split("-").map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join("");
-}
 
 const svgrConfig = {
   plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx"],
@@ -67,10 +64,6 @@ async function main() {
   // Barrel: src/index.ts
   const index = [
     "// Auto-generated — do not edit",
-    'export { default as Icon } from "./Icon";',
-    'export type { IconName } from "./icon-names";',
-    'export { iconNames } from "./icon-names";',
-    "",
     ...icons.map(({ name }) => `export { default as ${name} } from "./icons/${name}";`),
     "",
   ].join("\n");
@@ -87,6 +80,23 @@ async function main() {
     "",
   ].join("\n");
   await writeFile(join(SRC, "icon-names.ts"), names, "utf-8");
+
+  const loaders = [
+    "// Auto-generated — do not edit",
+    "export const iconLoaders = {",
+    icons.map(({ name }) => `  ${name}: () => import("./icons/${name}"),`).join("\n"),
+    "} as const;",
+    "",
+  ].join("\n");
+  await writeFile(join(SRC, "icon-loaders.ts"), loaders, "utf-8");
+
+  const catalog = [
+    "// Auto-generated — do not edit",
+    'export { iconNames } from "./icon-names";',
+    'export type { IconName } from "./icon-names";',
+    "",
+  ].join("\n");
+  await writeFile(join(SRC, "catalog.ts"), catalog, "utf-8");
 
   console.log(`Done. ${icons.length} components generated.`);
 }

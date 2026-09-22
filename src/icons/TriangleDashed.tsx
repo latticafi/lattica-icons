@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const TriangleDashed = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M10.17 4.193a2 2 0 0 1 3.666.013M14 21.001h2m-.126-13.258 1 1.732m1.975 3.478 1 1.732m1.975 3.495a2 2 0 0 1-1.835 2.825M4.024 21a2.002 2.002 0 0 1-1.839-2.838m2.951-5.21-1 1.733M8 21h2M8.102 7.743l-1 1.732" /></svg>);
+TriangleDashed.displayName = "TriangleDashed";
+export default TriangleDashed;

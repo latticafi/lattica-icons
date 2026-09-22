@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Sofa = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M4 18a2 2 0 0 1-2-2v-5a2 2 0 0 1 4 0v1.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V11a2 2 0 1 1 4 0v5a2 2 0 0 1-2 2M4 18h16M4 18v2m16-2v2M12 4v9" /></svg>);
+Sofa.displayName = "Sofa";
+export default Sofa;

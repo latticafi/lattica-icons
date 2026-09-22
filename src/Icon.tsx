@@ -7,6 +7,7 @@ import {
   type RefAttributes,
   type SVGProps,
 } from "react";
+import { iconLoaders } from "./icon-loaders";
 import type { IconName } from "./icon-names";
 
 export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "ref"> {
@@ -22,10 +23,10 @@ type Comp = ForwardRefExoticComponent<
 >;
 const cache = new Map<string, React.LazyExoticComponent<Comp>>();
 
-function getLazy(name: string) {
+function getLazy(name: IconName) {
   let c = cache.get(name);
   if (!c) {
-    c = lazy(() => import(`./icons/${name}`) as Promise<{ default: Comp }>);
+    c = lazy(iconLoaders[name] as () => Promise<{ default: Comp }>);
     cache.set(name, c);
   }
   return c;

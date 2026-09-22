@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ShieldCogCorner = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 22c-3.806-1.45-7-3.966-7-9V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1v4m-5.077 6.547L14 16.165m.923 2.68-.923.382m2.547-4.303L16.164 14m.383 6.467-.383.925m2.679-6.469.383-.923m-.001 7.392-.382-.925m1.624-3.92.923-.383m-.923 2.68.923.382" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M17.695 20.695a3 3 0 1 0 0-6 3 3 0 0 0 0 6" /></svg>);
+ShieldCogCorner.displayName = "ShieldCogCorner";
+export default ShieldCogCorner;

@@ -1,0 +1,38 @@
+name: Sync Figma Icons
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: figma-icon-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Export canonical Figma frame
+        run: npm run export:figma
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FIGMA_FILE_KEY: xl01U3PawlPC5RtraiZVaV
+          FIGMA_ICON_NODE_ID: "22:4"
+      - run: npm run verify:sources
+      - run: npm run build
+      - run: npm run verify:package
+      - name: Prepare review artifact
+        run: tar -czf /tmp/figma-icon-sync.tgz svg icons.manifest.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: figma-icon-sync
+          path: /tmp/figma-icon-sync.tgz
+          retention-days: 7
