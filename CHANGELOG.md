@@ -1,5 +1,11 @@
 # @latticafi/icons
 
+## 0.3.0
+
+### Minor Changes
+
+- fb5f83a: Add AppStore, Discord, GooglePlay, and XTwitter icons from the canonical Figma Icons frame.
+
 ## 0.2.0
 
 ### Minor Changes
