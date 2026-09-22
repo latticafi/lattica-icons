@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const FolderGit2 = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M18 19a5 5 0 0 1-5-5v8" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M13 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4m7 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4" /></svg>);
+FolderGit2.displayName = "FolderGit2";
+export default FolderGit2;

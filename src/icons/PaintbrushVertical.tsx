@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const PaintbrushVertical = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M10 2v2m4-2v4m4 6V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v9m12 0H6m12 0a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2h-2a1 1 0 0 0-1 1v2.9a2 2 0 0 1-4 0V17a1 1 0 0 0-1-1H7a2 2 0 0 1-2-2v-1a1 1 0 0 1 1-1" /></svg>);
+PaintbrushVertical.displayName = "PaintbrushVertical";
+export default PaintbrushVertical;

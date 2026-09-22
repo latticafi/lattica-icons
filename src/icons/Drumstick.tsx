@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Drumstick = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M15.4 15.63c-1.497.48-2.981.492-4.236.033a4.66 4.66 0 0 1-2.732-2.58c-.52-1.218-.575-2.685-.156-4.184.418-1.498 1.287-2.951 2.48-4.144 1.192-1.192 2.645-2.061 4.144-2.48 1.499-.418 2.965-.363 4.182.157a4.66 4.66 0 0 1 2.581 2.732c.459 1.254.447 2.74-.033 4.236-.695-.397-1.576-.495-2.495-.28-.918.216-1.82.733-2.55 1.465-.732.73-1.248 1.631-1.464 2.55-.216.92-.117 1.8.279 2.495" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m8.29 12.71-2.6 2.6a2.499 2.499 0 0 0-3.369 3.444A2.5 2.5 0 0 0 4.04 19.96 2.5 2.5 0 1 0 8.7 18.3l2.59-2.59" /></svg>);
+Drumstick.displayName = "Drumstick";
+export default Drumstick;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const MapMinus = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M15 5.764a2 2 0 0 1-.894-.21L9.894 3.446a2 2 0 0 0-1.788 0L3.553 5.724A1 1 0 0 0 3 6.618v12.763a1 1 0 0 0 1.447.897l3.659-1.83a2 2 0 0 1 1.788 0L11 19M9 3.236v15m6-12.472a2 2 0 0 0 .894-.21l3.659-1.83A1 1 0 0 1 21 4.618V14m-6-8.236V14m6 4h-6" /></svg>);
+MapMinus.displayName = "MapMinus";
+export default MapMinus;

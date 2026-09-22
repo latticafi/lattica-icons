@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Mouth = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M2 12a50.5 50.5 0 0 0 20 0 1 1 0 0 0-1-1" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M2.023 11.78a1 1 0 0 1 .434-.621c2.427-1.567 3.65-2.283 5.48-3.643a2.62 2.62 0 0 1 3.373.208 1 1 0 0 0 1.38 0 2.6 2.6 0 0 1 3.373-.208c1.829 1.36 3.053 2.076 5.479 3.644a1 1 0 0 1 .308 1.368 11.59 11.59 0 0 1-19.7 0 1 1 0 0 1-.127-.748" /></svg>);
+Mouth.displayName = "Mouth";
+export default Mouth;

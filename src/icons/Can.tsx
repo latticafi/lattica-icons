@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Can = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M21 10.5c0 .663-.948 1.299-2.636 1.768S14.387 13 12 13s-4.676-.263-6.364-.732C3.948 11.798 3 11.163 3 10.5v8c0 .663.948 1.299 2.636 1.768S9.613 21 12 21s4.676-.263 6.364-.732C20.052 19.798 21 19.163 21 18.5z" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M18.557 7.53C20.097 8.7 20.975 9.767 21 10.5c-.014.717-.882 1.036-2.415.888-1.533-.147-3.607-.75-5.77-1.677-2.164-.927-4.242-2.103-5.782-3.271-1.54-1.17-2.418-2.236-2.443-2.97.014-.717.882-1.036 2.415-.888s3.607.75 5.77 1.677c2.164.927 4.242 2.103 5.782 3.271" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M3 10.5c-.001-.543.636-1.072 1.813-1.506s2.833-.75 4.714-.899M9 16.858a31 31 0 0 0 6 0" /></svg>);
+Can.displayName = "Can";
+export default Can;

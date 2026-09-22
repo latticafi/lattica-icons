@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Database = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 8c4.97 0 9-1.343 9-3s-4.03-3-9-3-9 1.343-9 3 4.03 3 9 3" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M3 5v14c0 .796.948 1.559 2.636 2.121S9.613 22 12 22s4.676-.316 6.364-.879S21 19.796 21 19V5" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M3 12c0 .796.948 1.559 2.636 2.121S9.613 15 12 15s4.676-.316 6.364-.879S21 12.796 21 12" /></svg>);
+Database.displayName = "Database";
+export default Database;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Mop = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M10 22c2.761 0 5-1.79 5-4-4.42 0-4.08-5-8.5-5a4.5 4.5 0 0 0 0 9zm0 0a3 3 0 0 1-3-3m5.5-7.5L22 2" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m6.98 13.02 2.665-2.664a1.21 1.21 0 0 1 1.71 0l2.29 2.288a1.21 1.21 0 0 1 0 1.712l-2.088 2.087" /></svg>);
+Mop.displayName = "Mop";
+export default Mop;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Gift = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 7v14m0-14c-.362-1.49-.985-2.765-1.787-3.657C9.41 2.451 8.465 1.983 7.5 2a2.5 2.5 0 1 0 0 5M12 7c.362-1.49.985-2.765 1.787-3.657.803-.892 1.748-1.36 2.713-1.343a2.5 2.5 0 0 1 0 5m3.5 4v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M20 7H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1" /></svg>);
+Gift.displayName = "Gift";
+export default Gift;

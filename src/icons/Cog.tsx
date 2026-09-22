@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Cog = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 10.27 7 3.34m4 10.39-4 6.93M12 22v-2m0-18v2m2 8h8m-5 8.66-1-1.73m1-15.59-1 1.73M2 12h2m16.66 5-1.73-1m1.73-9-1.73 1M3.34 17l1.73-1M3.34 7l1.73 1M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16" /></svg>);
+Cog.displayName = "Cog";
+export default Cog;

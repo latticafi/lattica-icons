@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ClipboardPaste = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 14h10m-4-4 4 4-4 4M16 4h2a2 2 0 0 1 2 2v1.344" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 1.793-1.113" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1" /></svg>);
+ClipboardPaste.displayName = "ClipboardPaste";
+export default ClipboardPaste;

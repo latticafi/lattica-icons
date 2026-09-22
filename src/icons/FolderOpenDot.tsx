@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const FolderOpenDot = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20m0 0a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2z" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M14 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2" /></svg>);
+FolderOpenDot.displayName = "FolderOpenDot";
+export default FolderOpenDot;

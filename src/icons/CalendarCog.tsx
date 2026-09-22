@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const CalendarCog = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m15.228 16.852-.923-.383m.923 2.679-.923.383M16 2v3m.47 9.305.382.923m0 5.544-.383.924m2.679-6.468.383-.923m-.001 7.391-.382-.924m1.625-3.92.924-.383m-.924 2.679.924.383M21 10.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5.5M3 9h18M8 2v3" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6" /></svg>);
+CalendarCog.displayName = "CalendarCog";
+export default CalendarCog;

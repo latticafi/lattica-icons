@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const BowArrow = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M21 7V3h-4m4 0L9.707 14.293m8.868-3.211a13 13 0 0 1 1.048 9.027 1.17 1.17 0 0 1-1.914.597L14 17m-7-7L3.29 6.29a1.17 1.17 0 0 1 .6-1.91 13 13 0 0 1 9.03 1.05m-3.213 8.863A1 1 0 0 1 10 15v2a1.7 1.7 0 0 1-.5 1.207l-2.646 2.647A.5.5 0 0 1 6 20.5V19a1 1 0 0 0-1-1H3.5a.5.5 0 0 1-.353-.854L5.793 14.5A1.7 1.7 0 0 1 7 14h2a1 1 0 0 1 .707.293" /></svg>);
+BowArrow.displayName = "BowArrow";
+export default BowArrow;

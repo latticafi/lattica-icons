@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const FireExtinguisher = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M15 6.5V3m0 0a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v3.5M15 3h3M9 18h8" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 3a6 6 0 0 0-6 6v11m0-7h4m8-3a4 4 0 1 0-8 0v10a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2z" /></svg>);
+FireExtinguisher.displayName = "FireExtinguisher";
+export default FireExtinguisher;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const BoneFracture = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m16 20-1-2m5-2-2-1M4 8l2 1m2-5 1 2m5-1.5a2.5 2.5 0 0 1 5 0 .5.5 0 0 0 .5.5 2.5 2.5 0 0 1 0 5c-.81 0-1.8-.7-2.5 0l-1.958 1.957a.15.15 0 0 1-.147.038.15.15 0 0 1-.105-.11l-.493-2.07a.15.15 0 0 0-.111-.112l-2.072-.494a.15.15 0 0 1-.072-.252L14 7c.7-.7 0-1.69 0-2.5m-4.302 9.69a.15.15 0 0 0 .112.112l2.074.489a.15.15 0 0 1 .072.252L10 17c-.7.7 0 1.69 0 2.5a2.5 2.5 0 0 1-5 0 .495.495 0 0 0-.5-.5 2.5 2.5 0 0 1 0-5c.81 0 1.8.7 2.5 0l1.956-1.957a.15.15 0 0 1 .147-.038.15.15 0 0 1 .105.11z" /></svg>);
+BoneFracture.displayName = "BoneFracture";
+export default BoneFracture;

@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Astroid = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12.639 21.772a1 1 0 0 0 .344-.586 10 10 0 0 1 8.203-8.203 1 1 0 0 0 0-1.966 10 10 0 0 1-8.203-8.203 1 1 0 0 0-1.966 0 10 10 0 0 1-8.203 8.203 1 1 0 0 0 0 1.966 10 10 0 0 1 8.203 8.203 1 1 0 0 0 1.622.586" /></svg>);
+Astroid.displayName = "Astroid";
+export default Astroid;

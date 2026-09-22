@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ArrowUp01 = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 8 7 4 3 8m4-4v16M19 6a2 2 0 1 0-4 0v2a2 2 0 1 0 4 0zm-2 14v-6h-2m0 6h4" /></svg>);
+ArrowUp01.displayName = "ArrowUp01";
+export default ArrowUp01;

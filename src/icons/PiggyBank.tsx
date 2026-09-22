@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const PiggyBank = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M5 11a6 6 0 0 1 6-6h3.5l.3-.4A4 4 0 0 1 18 3v3a5 5 0 0 1 2 4h1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-1a3.16 3.16 0 0 1-2 2v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2h-3v2a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-3a5 5 0 0 1-2-4zm0 0H4a2 2 0 0 1-2-2V8m14 2h.01" /></svg>);
+PiggyBank.displayName = "PiggyBank";
+export default PiggyBank;

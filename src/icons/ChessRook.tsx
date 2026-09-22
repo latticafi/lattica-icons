@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const ChessRook = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M7 18a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2M7 18h10M7 18l1-9m9 9-1-9m-6-7v2m4-2v2m2 5H8m8 0a2 2 0 0 0 2-2V2M6 2v5a2 2 0 0 0 2 2M6 4h12" /></svg>);
+ChessRook.displayName = "ChessRook";
+export default ChessRook;

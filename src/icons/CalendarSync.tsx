@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const CalendarSync = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M11 10v4h4" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m11 14 1.535-1.605a5 5 0 0 1 8 1.5M16 2v3m5 13-1.535 1.605a5 5 0 0 1-8-1.5" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M21 22v-4h-4m4-9.483V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.517M3 9h4m1-7v3" /></svg>);
+CalendarSync.displayName = "CalendarSync";
+export default CalendarSync;

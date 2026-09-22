@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Galaxy = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M16.005 15.108c.946-1.427 1.434-3.114 1.358-4.694s-.711-2.926-1.766-3.745c-1.054-.819-2.444-1.045-3.867-.629S8.965 7.48 7.997 8.891c-.946 1.427-1.434 3.114-1.358 4.694.077 1.58.711 2.926 1.766 3.745 1.054.819 2.444 1.045 3.867.629s2.765-1.44 3.733-2.851m0 0c-1.666 2.284-3.721 4.015-5.788 4.875-2.066.86-4.006.79-5.462-.196s-2.33-2.821-2.464-5.17S2.775 9.564 4.029 7M17 21h.01M7 3h.01" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M7.997 8.89c1.666-2.285 3.722-4.017 5.79-4.878s4.007-.791 5.463.195 2.332 2.822 2.465 5.172-.485 5.055-1.741 7.619" /><path fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2" /></svg>);
+Galaxy.displayName = "Galaxy";
+export default Galaxy;

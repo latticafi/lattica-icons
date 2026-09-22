@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Ham = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M13.144 21.144c.97-.97 1.797-2.064 2.435-3.219s1.073-2.347 1.281-3.511c.209-1.163.186-2.275-.067-3.27s-.731-1.855-1.406-2.53c-.676-.676-1.536-1.154-2.531-1.407s-2.107-.276-3.27-.068c-1.164.209-2.357.644-3.512 1.282a14.5 14.5 0 0 0-3.218 2.435" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M16.565 10.435 18.6 8.4a2.501 2.501 0 1 0 1.65-4.65 2.5 2.5 0 1 0-4.66 1.66l-2.024 2.025M8.5 16.5l-1-1m5.644 5.644c.819-.819 1.062-2.146.676-3.69-.386-1.543-1.369-3.177-2.733-4.541s-2.998-2.347-4.542-2.733-2.87-.143-3.689.676-1.062 2.146-.676 3.69c.386 1.543 1.369 3.176 2.733 4.54 1.364 1.365 2.998 2.348 4.542 2.734s2.87.142 3.689-.676" /></svg>);
+Ham.displayName = "Ham";
+export default Ham;

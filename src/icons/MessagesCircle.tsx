@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const MessagesCircle = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M19.95 10.05a7 7 0 0 1 1.412 7.872 1 1 0 0 0-.058.787l.675 2.09a1 1 0 0 1-1.236 1.167l-2.155-.63a1 1 0 0 0-.745.06 7 7 0 0 1-7.793-1.446m-7.354-7.242a1 1 0 0 0-.058-.785 7 7 0 1 1 3.518 3.473 1 1 0 0 0-.744-.06l-2.155.63a1 1 0 0 1-1.236-1.168z" /></svg>);
+MessagesCircle.displayName = "MessagesCircle";
+export default MessagesCircle;

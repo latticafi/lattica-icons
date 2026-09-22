@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const PackageCheck = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M12 22V12m4 5 2 2 4-4" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 0l1.32-.752" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M3.29 7 12 12l8.71-5M7.5 4.27l8.997 5.148" /></svg>);
+PackageCheck.displayName = "PackageCheck";
+export default PackageCheck;

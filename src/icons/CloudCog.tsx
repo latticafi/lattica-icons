@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const CloudCog = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m10.852 19.772-.383.924m2.679-6.468.383-.923m-.383.923a3.001 3.001 0 0 1 0 5.544m0-5.544a3 3 0 0 0-2.296 0l-.383-.923m3.061 7.391-.382-.924a3 3 0 1 1-2.296-5.544m3.92 1.624.923-.383m-.923 2.679.923.383" /><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="M4.2 15.1A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.2m-10.772-.348-.923-.383m.923 2.68-.923.382" /></svg>);
+CloudCog.displayName = "CloudCog";
+export default CloudCog;
