@@ -5,10 +5,10 @@
     "fileKey": "xl01U3PawlPC5RtraiZVaV",
     "nodeId": "22:4",
     "fileName": "design system",
-    "fileVersion": "2401928613112433128",
-    "lastModified": "2026-09-22T06:04:54Z"
+    "fileVersion": "2402134248890288657",
+    "lastModified": "2026-09-22T19:11:17Z"
   },
-  "iconCount": 1838,
+  "iconCount": 1842,
   "icons": [
     {
       "id": "22:8",
@@ -379,6 +379,14 @@
       "sha256": "7e9f8f8120c954f205cef974ddc91c81f48556ec8051d2d2a4e22e5b1d5b60e7"
     },
     {
+      "id": "294:13917",
+      "sourceName": "app-store",
+      "sourcePath": "Icons / Icons: a / icon-grid / Icon / app-store / app-store",
+      "exportName": "AppStore",
+      "file": "svg/app-store.svg",
+      "sha256": "b09cc072678faa6c493510bc91b6c3a046f2943ce2f0b457f37ec1f1ba798dd9"
+    },
+    {
       "id": "22:230",
       "sourceName": "app-window",
       "sourcePath": "Icons / Icons: a / icon-grid / Icon / app-window / app-window",
@@ -440,7 +448,7 @@
       "sourcePath": "Icons / Icons: a / icon-grid / Icon / arrow-big-down-dash / arrow-big-down-dash",
       "exportName": "ArrowBigDownDash",
       "file": "svg/arrow-big-down-dash.svg",
-      "sha256": "fdd9f68e04e2f7eef9ee795703b4e7b6091889e895dc7b2fcb8b853cb88fa11a"
+      "sha256": "797a1a3f37259767286148a19ab07d7572d20ef77a1da0b5f087f343ba423630"
     },
     {
       "id": "22:269",
@@ -4547,6 +4555,14 @@
       "sha256": "8e755d065b3139188d4d0437c3fd5e75dbc6ee2be9f9d9acf154865616521c44"
     },
     {
+      "id": "294:13921",
+      "sourceName": "discord",
+      "sourcePath": "Icons / Icons: d / icon-grid / Icon / discord / discord",
+      "exportName": "Discord",
+      "file": "svg/discord.svg",
+      "sha256": "3ad75dd1c12c91d885ef7f6924f6ebed2df3849ed468ca666e87e3d9734ce3dc"
+    },
+    {
       "id": "22:2579",
       "sourceName": "divide",
       "sourcePath": "Icons / Icons: d / icon-grid / Icon / divide / divide",
@@ -6393,6 +6409,14 @@
       "exportName": "Goal",
       "file": "svg/goal.svg",
       "sha256": "74e73831140f97dbc79cb735e890789e7c4a7b576568e0e34b716c84c71315a7"
+    },
+    {
+      "id": "294:13925",
+      "sourceName": "google-play",
+      "sourcePath": "Icons / Icons: g / icon-grid / Icon / google-play / google-play",
+      "exportName": "GooglePlay",
+      "file": "svg/google-play.svg",
+      "sha256": "439f9eec2a517c893a539a670575898efa073ddce0bd54a0490747c484445d01"
     },
     {
       "id": "22:3670",
@@ -14577,6 +14601,14 @@
       "exportName": "XLineTop",
       "file": "svg/x-line-top.svg",
       "sha256": "66cd7168ebed23ac2cf8f886b1252b3e8a353e4d6255c7ae889759a0004ca0a2"
+    },
+    {
+      "id": "294:13929",
+      "sourceName": "x-twitter",
+      "sourcePath": "Icons / Icons: x / icon-grid / Icon / x-twitter / x-twitter",
+      "exportName": "XTwitter",
+      "file": "svg/x-twitter.svg",
+      "sha256": "db8cefe9dfa30baeaa34f08e6ca7119c85cc4f4cba72d3a853b99c2e2367f728"
     },
     {
       "id": "22:8254",

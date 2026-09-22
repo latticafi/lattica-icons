@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const GooglePlay = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path fill="currentColor" d="M1.22 0c-.03.093-.06.185-.06.308v23.229c0 .217.061.34.184.463L12.76 11.907zm12.31 12.708 2.95 3.045-4.213 2.4s-5.355 3.044-8.308 4.739zm.8-.831 3.166 3.292c.496-.276 4.371-2.492 4.924-2.8.584-.338.525-.8.03-1.046-.46-.255-4.335-2.475-4.92-2.835l-3.204 3.392zm-.803-.8 2.984-3.169-4.259-2.431S5.31 1.505 3 .179l10.53 10.898z" /></svg>);
+GooglePlay.displayName = "GooglePlay";
+export default GooglePlay;
