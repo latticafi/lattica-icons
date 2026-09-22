@@ -3,6 +3,7 @@ name: Build & Publish
 on:
   push:
     branches: [main]
+    tags: ["v*"]
   workflow_dispatch:
     inputs:
       sync_figma:
@@ -19,12 +20,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
-      pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 20
           registry-url: "https://npm.pkg.github.com"
@@ -36,11 +36,11 @@ jobs:
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
           FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
       - run: npm run build
-      - name: Create release PR or publish
-        uses: changesets/action@v1
-        with:
-          publish: npm run release
-          version: npm run version
+      - name: Verify release tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: node scripts/verify-release-tag.mjs
+      - name: Publish to GitHub Packages
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -85,5 +85,21 @@ Create a changeset for each publishable change:
 npx changeset
 ```
 
-Push the changeset to `main`. The release workflow creates a version PR.
-Merging that PR publishes the new version to GitHub Packages.
+Apply pending changesets and commit the resulting version update:
+
+```bash
+npm run version
+git add .
+git commit -m "Release vX.Y.Z"
+git push origin main
+```
+
+Tag that commit with the exact package version to publish it:
+
+```bash
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
+Every push to `main` is built. Only a matching `v*` tag publishes to GitHub
+Packages.
