@@ -1,5 +1,12 @@
 # @latticafi/icons
 
+## 0.4.0
+
+### Minor Changes
+
+- 0facb1b: Add 13 sports icons and make Figma synchronization incremental with verified
+  source fingerprints and an explicit full-reconciliation mode.
+
 ## 0.3.0
 
 ### Minor Changes
