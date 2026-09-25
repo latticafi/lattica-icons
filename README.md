@@ -97,21 +97,38 @@ FIGMA_FILE_KEY=xl01U3PawlPC5RtraiZVaV
 FIGMA_ICON_NODE_ID=22:4
 ```
 
-Run the transactional sync and build:
+Run the transactional incremental sync and build:
 
 ```bash
 npm run generate
 npm run verify
 ```
 
-The sync downloads only components inside frame `22:4`, rejects naming
-collisions and unexpectedly large removals, validates every SVG, and replaces
-`svg/` only after the complete export succeeds. `icons.manifest.json` records
-the exact Figma version, source path, exported name, and content hash.
+The sync reads only components inside frame `22:4`. It fingerprints each
+component's vector geometry and render-relevant properties, then renders only
+new or changed icons. Renamed and unchanged icons reuse their verified SVGs.
+Deleted icons are removed from the staged result.
+
+Every run still stages and validates the complete icon set before replacing
+`svg/`. It also rejects naming collisions and unexpectedly large removals.
+`icons.manifest.json` records the exact Figma version, source path, source
+fingerprint, exported name, and SVG content hash.
+
+Use a full reconciliation after changes to shared Figma dependencies, when
+investigating rendering drift, and periodically before a release:
+
+```bash
+npm run export:figma:full
+npm run verify
+```
+
+The first sync after upgrading an older manifest automatically performs one
+full render to establish trustworthy source fingerprints.
 
 GitHub's **Sync Figma Icons** workflow performs the same process without
-publishing. Download its `figma-icon-sync` artifact, review the source and
-manifest diff locally, then open a normal pull request.
+publishing. Its **full_sync** input forces a complete render. Download the
+`figma-icon-sync` artifact, review the source and manifest diff locally, then
+open a normal pull request.
 
 ## Release
 

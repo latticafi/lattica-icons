@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const Pickleball = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path fill="currentColor" d="m20.895 6.548-3.443-3.443a.36.36 0 0 0-.507 0l-5.806 5.806a.36.36 0 0 0-.105.254v1.737L3.105 18.83a.36.36 0 0 0 0 .508l1.558 1.557a.36.36 0 0 0 .507 0l7.928-7.928h1.737a.36.36 0 0 0 .253-.106l5.807-5.806a.36.36 0 0 0 0-.507M4.916 20.134l-1.05-1.05 3.646-3.646 1.05 1.05zm9.77-7.885H12.95a.36.36 0 0 0-.254.105l-3.627 3.627-1.05-1.05 3.627-3.627a.36.36 0 0 0 .105-.254V9.314l5.448-5.448L20.133 6.8z" /><path fill="currentColor" d="M16.523 5.673a.36.36 0 0 0-.507 0L13.12 8.57a.359.359 0 0 0 .507.507l2.896-2.897a.36.36 0 0 0 0-.507m.929-.928a.36.36 0 0 0-.507 0l-.137.136a.359.359 0 0 0 .507.507l.137-.136a.36.36 0 0 0 0-.507" /></svg>);
+Pickleball.displayName = "Pickleball";
+export default Pickleball;

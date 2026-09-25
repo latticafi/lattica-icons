@@ -59,6 +59,7 @@
   ],
   "scripts": {
     "export:figma": "node --env-file-if-exists=.env.local scripts/export-figma-icons.mjs",
+    "export:figma:full": "npm run export:figma -- --full",
     "optimize": "node scripts/optimize-svgs.mjs",
     "build:svg": "node scripts/generate-components.mjs",
     "build:bundle": "tsup --silent",

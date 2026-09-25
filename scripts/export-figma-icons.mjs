@@ -28,6 +28,19 @@ const DEFAULT_BATCH_SIZE = 50;
 const DEFAULT_DOWNLOAD_CONCURRENCY = 10;
 const DEFAULT_REQUEST_INTERVAL_MS = 6_500;
 const DEFAULT_MAX_ATTEMPTS = 6;
+const MANIFEST_SCHEMA_VERSION = 2;
+
+const SOURCE_HASH_OMITTED_KEYS = new Set([
+  "absoluteBoundingBox",
+  "absoluteRenderBounds",
+  "annotations",
+  "description",
+  "devStatus",
+  "documentationLinks",
+  "id",
+  "interactions",
+  "name",
+]);
 
 const sleep = (milliseconds) =>
   new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -68,6 +81,36 @@ export async function fetchWithRetry(url, options = {}, config = {}) {
   throw new Error(`Request failed after ${maxAttempts} attempts`);
 }
 
+function normalizeSourceValue(value, { root = false } = {}) {
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeSourceValue(item));
+  }
+  if (!value || typeof value !== "object") return value;
+
+  return Object.fromEntries(
+    Object.keys(value)
+      .filter((key) => !SOURCE_HASH_OMITTED_KEYS.has(key))
+      .sort()
+      .map((key) => {
+        let normalized = normalizeSourceValue(value[key]);
+        if (root && key === "relativeTransform" && Array.isArray(normalized)) {
+          normalized = normalized.map((row, rowIndex) =>
+            Array.isArray(row)
+              ? row.map((entry, columnIndex) =>
+                  columnIndex === 2 && rowIndex < 2 ? 0 : entry,
+                )
+              : row,
+          );
+        }
+        return [key, normalized];
+      }),
+  );
+}
+
+export function componentSourceHash(node) {
+  return sha256(JSON.stringify(normalizeSourceValue(node, { root: true })));
+}
+
 export function collectComponents(node, ancestors = [], output = []) {
   const path = [...ancestors, node.name].filter(Boolean);
   if (node.type === "COMPONENT") {
@@ -78,10 +121,54 @@ export function collectComponents(node, ancestors = [], output = []) {
       sourcePath: path.join(" / "),
       fileName,
       exportName: toPascalCase(fileName),
+      sourceSha256: componentSourceHash(node),
     });
   }
   for (const child of node.children ?? []) collectComponents(child, path, output);
   return output;
+}
+
+export function planComponentSync(components, previousManifest, { full = false } = {}) {
+  const previousIcons = previousManifest?.icons ?? [];
+  const previousById = new Map(previousIcons.map((icon) => [icon.id, icon]));
+  const migrationRequired = previousManifest?.schemaVersion !== MANIFEST_SCHEMA_VERSION;
+  const forceRender = full || migrationRequired;
+  const items = components.map((component) => {
+    const previous = previousById.get(component.id);
+    previousById.delete(component.id);
+
+    if (forceRender) {
+      return {
+        action: "render",
+        reason: full ? "full" : "manifest-migration",
+        component,
+        previous,
+      };
+    }
+    if (!previous) return { action: "render", reason: "new", component };
+    if (previous.sourceSha256 !== component.sourceSha256) {
+      return { action: "render", reason: "changed", component, previous };
+    }
+
+    const currentFile = `svg/${component.fileName}.svg`;
+    const metadataChanged =
+      previous.sourceName !== component.sourceName ||
+      previous.sourcePath !== component.sourcePath ||
+      previous.exportName !== component.exportName ||
+      previous.file !== currentFile;
+    return {
+      action: "reuse",
+      reason: metadataChanged ? "renamed" : "unchanged",
+      component,
+      previous,
+    };
+  });
+
+  return {
+    items,
+    removed: [...previousById.values()],
+    migrationRequired,
+  };
 }
 
 export function assertUniqueNames(components) {
@@ -92,7 +179,8 @@ export function assertUniqueNames(components) {
       if (previous) {
         throw new Error(
           `Name collision for ${key} "${component[key]}": ` +
-            `"${previous.sourcePath}" and "${component.sourcePath}"`,
+            `"${previous.sourcePath}" (${previous.id}) and ` +
+            `"${component.sourcePath}" (${component.id})`,
         );
       }
       if (!component[key]) {
@@ -128,6 +216,15 @@ async function previousIconCount() {
     } catch {
       return 0;
     }
+  }
+}
+
+async function readPreviousManifest() {
+  try {
+    return JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw new Error(`Could not read ${basename(MANIFEST_PATH)}: ${error.message}`);
   }
 }
 
@@ -170,6 +267,38 @@ async function api(path, token) {
   return response.json();
 }
 
+function manifestEntry(component, contentSha256) {
+  return {
+    id: component.id,
+    sourceName: component.sourceName,
+    sourcePath: component.sourcePath,
+    exportName: component.exportName,
+    file: `svg/${component.fileName}.svg`,
+    sourceSha256: component.sourceSha256,
+    sha256: contentSha256,
+  };
+}
+
+async function reuseIcon(item, stagedSvg) {
+  if (
+    typeof item.previous?.file !== "string" ||
+    item.previous.file !== `svg/${basename(item.previous.file)}` ||
+    typeof item.previous.sha256 !== "string"
+  ) {
+    return null;
+  }
+  try {
+    const source = await readFile(join(ROOT, item.previous.file), "utf8");
+    validateSvg(source, item.previous.file);
+    if (sha256(source) !== item.previous.sha256) return null;
+    await writeFile(join(stagedSvg, `${item.component.fileName}.svg`), source, "utf8");
+    return manifestEntry(item.component, item.previous.sha256);
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
 export async function exportIcons({
   token = process.env.FIGMA_TOKEN,
   fileKey = process.env.FIGMA_FILE_KEY,
@@ -181,12 +310,13 @@ export async function exportIcons({
   requestIntervalMs = Number(
     process.env.FIGMA_REQUEST_INTERVAL_MS ?? DEFAULT_REQUEST_INTERVAL_MS,
   ),
+  full = process.env.FIGMA_FULL_SYNC === "true",
 } = {}) {
   if (!token || !fileKey) throw new Error("Missing FIGMA_TOKEN or FIGMA_FILE_KEY");
 
   console.log(`Fetching canonical Figma frame ${nodeId}...`);
   const file = await api(
-    `/files/${fileKey}/nodes?ids=${encodeURIComponent(nodeId)}`,
+    `/files/${fileKey}/nodes?ids=${encodeURIComponent(nodeId)}&geometry=paths`,
     token,
   );
   const root = file.nodes?.[nodeId]?.document;
@@ -197,32 +327,64 @@ export async function exportIcons({
   );
   if (!components.length) throw new Error(`Figma node ${nodeId} contains no components`);
   assertUniqueNames(components);
+  const previousManifest = await readPreviousManifest();
   assertSafeCount(
-    await previousIconCount(),
+    previousManifest?.icons?.length ?? (await previousIconCount()),
     components.length,
     process.env.FIGMA_ALLOW_ICON_REMOVAL === "true",
     Number(process.env.FIGMA_MAX_REMOVAL_PERCENT ?? 10),
   );
   console.log(`Found ${components.length} unique components.`);
 
+  const plan = planComponentSync(components, previousManifest, { full });
+  const counts = plan.items.reduce((result, item) => {
+    result[item.reason] = (result[item.reason] ?? 0) + 1;
+    return result;
+  }, {});
+  const renderCount = plan.items.filter((item) => item.action === "render").length;
+  if (plan.migrationRequired && !full) {
+    console.log("Manifest fingerprints are missing or outdated; running one full migration sync.");
+  }
+  console.log(
+    `Plan: ${counts.new ?? 0} new, ${counts.changed ?? 0} changed, ` +
+      `${counts.renamed ?? 0} renamed, ${counts.unchanged ?? 0} unchanged, ` +
+      `${plan.removed.length} removed, ${renderCount} to render` +
+      `${full ? ", full reconciliation requested" : ""}.`,
+  );
+
   const stagingRoot = await mkdtemp(join(tmpdir(), "lattica-icons-"));
   const stagedSvg = join(stagingRoot, "svg");
   await mkdir(stagedSvg);
-  const manifestIcons = [];
+  const manifestIcons = new Map();
 
   try {
-    const batches = chunk(components, batchSize);
+    const renderItems = [];
+    for (const item of plan.items) {
+      if (item.action === "render") {
+        renderItems.push(item);
+        continue;
+      }
+      const entry = await reuseIcon(item, stagedSvg);
+      if (entry) manifestIcons.set(item.component.id, entry);
+      else renderItems.push({ ...item, action: "render", reason: "invalid-cache" });
+    }
+
+    if (renderItems.some((item) => item.reason === "invalid-cache")) {
+      console.log("Some cached SVGs were missing or invalid; rendering them again.");
+    }
+
+    const batches = chunk(renderItems, batchSize);
     for (let index = 0; index < batches.length; index++) {
       const batch = batches[index];
-      console.log(`Exporting batch ${index + 1}/${batches.length}...`);
-      const ids = batch.map(({ id }) => id).join(",");
+      console.log(`Rendering batch ${index + 1}/${batches.length}...`);
+      const ids = batch.map(({ component }) => component.id).join(",");
       const params = new URLSearchParams({ ids, format: "svg" });
       if (file.version) params.set("version", file.version);
       const images = await api(`/images/${fileKey}?${params}`, token);
 
       for (const downloadGroup of chunk(batch, downloadConcurrency)) {
         const entries = await Promise.all(
-          downloadGroup.map(async (component) => {
+          downloadGroup.map(async ({ component }) => {
             const url = images.images?.[component.id];
             if (!url) throw new Error(`${component.sourcePath}: Figma returned no image URL`);
             const response = await fetchWithRetry(url);
@@ -235,26 +397,20 @@ export async function exportIcons({
             const svg = optimizeSvg(source, `${component.fileName}.svg`);
             validateSvg(svg, component.sourcePath);
             await writeFile(join(stagedSvg, `${component.fileName}.svg`), svg, "utf8");
-            return {
-              id: component.id,
-              sourceName: component.sourceName,
-              sourcePath: component.sourcePath,
-              exportName: component.exportName,
-              file: `svg/${component.fileName}.svg`,
-              sha256: sha256(svg),
-            };
+            return manifestEntry(component, sha256(svg));
           }),
         );
-        manifestIcons.push(...entries);
+        for (const entry of entries) manifestIcons.set(entry.id, entry);
       }
       if (index < batches.length - 1) await sleep(requestIntervalMs);
     }
 
-    if (manifestIcons.length !== components.length) {
-      throw new Error(`Expected ${components.length} icons, exported ${manifestIcons.length}`);
+    if (manifestIcons.size !== components.length) {
+      throw new Error(`Expected ${components.length} icons, staged ${manifestIcons.size}`);
     }
+    const orderedIcons = components.map((component) => manifestIcons.get(component.id));
     const manifest = {
-      schemaVersion: 1,
+      schemaVersion: MANIFEST_SCHEMA_VERSION,
       source: {
         provider: "figma",
         fileKey,
@@ -263,22 +419,33 @@ export async function exportIcons({
         fileVersion: file.version,
         lastModified: file.lastModified,
       },
-      iconCount: manifestIcons.length,
-      icons: manifestIcons,
+      iconCount: orderedIcons.length,
+      icons: orderedIcons,
     };
     const stagedManifest = join(stagingRoot, basename(MANIFEST_PATH));
     await writeFile(stagedManifest, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 
     await replaceSources(stagedSvg, stagedManifest);
-    console.log(`Done. Exported ${manifestIcons.length} icons from ${nodeId}.`);
+    console.log(
+      `Done. Staged ${orderedIcons.length} icons from ${nodeId}; rendered ${renderItems.length}.`,
+    );
   } finally {
     await rm(stagingRoot, { recursive: true, force: true });
   }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  exportIcons().catch((error) => {
-    console.error(error);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const args = new Set(process.argv.slice(2));
+  const unknownArgs = [...args].filter((arg) => arg !== "--full");
+  if (unknownArgs.length) {
+    console.error(`Unknown argument: ${unknownArgs.join(", ")}`);
     process.exitCode = 1;
-  });
+  } else {
+    exportIcons({
+      full: args.has("--full") || process.env.FIGMA_FULL_SYNC === "true",
+    }).catch((error) => {
+      console.error(error);
+      process.exitCode = 1;
+    });
+  }
 }

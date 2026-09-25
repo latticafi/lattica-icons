@@ -1,0 +1,9 @@
+import { forwardRef, type SVGProps, type Ref } from "react";
+const TennisBall = forwardRef(({
+  size = 24,
+  ...props
+}: SVGProps<SVGSVGElement> & {
+  size?: number | string;
+}, ref: Ref<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true" width={size} height={size} ref={ref} {...props}><path fill="currentColor" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m0-16.92a7.92 7.92 0 1 0 6.29 12.72c-.625-.42-1.428-.48-2.31-.48a4.02 4.02 0 0 0-2.442.558l-1.394.489.018-.036q-.396.066-.797.068c-2.833 0-5.13-2.418-5.13-5.4s2.297-5.4 5.13-5.4q.402.002.797.069l-.018-.036 1.394.489c.733.441 1.59.637 2.442.559.882 0 1.685-.059 2.31-.48A7.9 7.9 0 0 0 12 4.08m3.983 4.32c-1.196 0-1.826-.21-3.052-.775a4.2 4.2 0 0 0-1.565-.245C8.91 7.38 7.039 9.415 7.039 12s1.872 4.621 4.327 4.621a4.2 4.2 0 0 0 1.565-.245c1.226-.565 1.856-.775 3.052-.775 1.053 0 2.011.016 2.756.545a7.87 7.87 0 0 0 0-8.291c-.745.529-1.703.545-2.756.545" /></svg>);
+TennisBall.displayName = "TennisBall";
+export default TennisBall;

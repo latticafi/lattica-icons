@@ -2,6 +2,11 @@ name: Sync Figma Icons
 
 on:
   workflow_dispatch:
+    inputs:
+      full_sync:
+        description: Render every icon instead of only new or changed icons
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -26,6 +31,7 @@ jobs:
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
           FIGMA_FILE_KEY: xl01U3PawlPC5RtraiZVaV
           FIGMA_ICON_NODE_ID: "22:4"
+          FIGMA_FULL_SYNC: ${{ inputs.full_sync }}
       - run: npm run verify:sources
       - run: npm run build
       - run: npm run verify:package
